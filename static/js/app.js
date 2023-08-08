@@ -20,10 +20,8 @@ function init() {
 
         // Add  samples to dropdown menu
         names.forEach((id) => {
-
             // Log the value of id for each iteration of the loop
             console.log(id);
-
             dropdownMenu.append("option")
             .text(id)
             .property("value",id);
@@ -31,7 +29,6 @@ function init() {
 
         // Set the first sample from the list
         let sample_one = names[0];
-
         // Log the value of sample_one
         console.log(sample_one);
 
@@ -49,28 +46,21 @@ function buildMetadata(sample) {
 
     // Use D3 to retrieve all of the data
     d3.json(url).then((data) => {
-
         // Retrieve all metadata
         let metadata = data.metadata;
-
         // Filter based on the value of the sample
         let value = metadata.filter(result => result.id == sample);
-
         // Log the array of metadata objects after the have been filtered
         console.log(value)
-
         // Get the first index from the array
         let valueData = value[0];
-
         // Clear out metadata
         d3.select("#sample-metadata").html("");
 
         // Use Object.entries to add each key/value pair to the panel
         Object.entries(valueData).forEach(([key,value]) => {
-
             // Log the individual key/value pairs as they are being appended to the metadata panel
             console.log(key,value);
-
             d3.select("#sample-metadata").append("h5").text(`${key}: ${value}`);
         });
     });
@@ -85,10 +75,8 @@ function buildBarChart(sample) {
 
         // Retrieve all sample data
         let sampleInfo = data.samples;
-
         // Filter based on the value of the sample
         let value = sampleInfo.filter(result => result.id == sample);
-
         // Get the first index from the array
         let valueData = value[0];
 
@@ -132,10 +120,8 @@ function buildBubbleChart(sample) {
         
         // Retrieve all sample data
         let sampleInfo = data.samples;
-
         // Filter based on the value of the sample
         let value = sampleInfo.filter(result => result.id == sample);
-
         // Get the first index from the array
         let valueData = value[0];
 
@@ -182,7 +168,6 @@ function optionChanged(value) {
     buildMetadata(value);
     buildBarChart(value);
     buildBubbleChart(value);
-    buildGaugeChart(value);
 };
 
 // Call the initialize function
